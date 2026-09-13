@@ -32,6 +32,148 @@
     padding: 24px;
   }
 
+  .site-nav {
+    background: var(--paper);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 12px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    letter-spacing: -1px;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.1s;
+  }
+
+  .nav-links a:hover {
+    border: 2px solid #000;
+    background: var(--accent-yellow);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #000;
+    border: 2px solid #000;
+  }
+
+  .hero {
+    background: var(--accent-cyan);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 48px 24px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero h2 {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+  }
+
+  .hero-lead {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent-pink);
+    color: #fff;
+    border: var(--border);
+    box-shadow: 4px 4px 0px #000;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.05s, box-shadow 0.05s;
+  }
+
+  .hero-cta:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  @media (max-width: 900px) {
+    .nav-toggle {
+      display: flex;
+    }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--paper);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      flex-direction: column;
+      padding: 12px;
+      min-width: 180px;
+      margin-top: 8px;
+      margin-right: 12px;
+    }
+    .nav-links.open {
+      display: flex;
+    }
+    .site-nav {
+      position: relative;
+    }
+    .hero h2 {
+      font-size: 2rem;
+    }
+  }
+
   header {
     background: var(--accent-yellow);
     border: var(--border);
@@ -339,6 +481,21 @@
 </head>
 <body>
 
+<nav class="site-nav">
+  <a href="#" class="nav-brand">ART LAB</a>
+  <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#guides">Guides</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
 <header>
   <div>
     <h1>ART LAB // Master Studio Engine</h1>
@@ -348,6 +505,14 @@
     <button class="chip-btn noprint" onclick="randomizeProject()">⚡ Surprise Studio Brief</button>
   </div>
 </header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Master Studio Engine</h2>
+    <p class="hero-lead">Generate step-by-step project guides, theory deep-dives, and portfolio systems inspired by history's greatest artists.</p>
+    <a href="#studio" class="hero-cta" onclick="document.querySelector('.main-grid').scrollIntoView({behavior:'smooth'}); return false;">Start Creating</a>
+  </div>
+</section>
 
 <div class="main-grid">
   <!-- CONTROL PANEL -->
