@@ -49,7 +49,7 @@ inspired by their style rather than a straight copy of an original.
 - images/artists/vincent-van-gogh.jpg   (Vincent van Gogh)
 - images/artists/william-morris.jpg   (William Morris)
 
-If you add a new artist to the `ARTISTS` array in `index.html`, its expected
-filename is the artist's name lowercased, with accents stripped and anything
-that isn't a letter or number turned into a `-` (that's what the page's
-`slugify()` function does automatically).
+If you add a new artist, add them to the `ARTISTS` array in `js/site-data.js`
+(each entry has a `slug` field — that's the expected filename here) and add a
+matching `artists/<slug>.html` page (copy an existing one and change the
+`data-slug` attribute and `<title>`).

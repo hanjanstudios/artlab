@@ -1,0 +1,458 @@
+/* ============================================================
+   ART LAB — Shared design system (used by every page on the site)
+   ============================================================ */
+
+:root {
+  --bg: #f5f0e8;
+  --paper: #ffffff;
+  --ink: #111111;
+  --accent-yellow: #ffee00;
+  --accent-pink: #ff2a70;
+  --accent-cyan: #00e5ff;
+  --accent-orange: #ff5e00;
+  --border: 3px solid #111111;
+  --shadow: 5px 5px 0px #111111;
+  --shadow-hover: 7px 7px 0px #111111;
+  --font-display: "Courier New", Courier, monospace, system-ui;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 24px;
+}
+
+.wrap { max-width: 900px; margin: 0 auto; }
+.wrap-wide { max-width: 1100px; margin: 0 auto; }
+
+a { color: inherit; }
+
+/* Loud poster type stays on headings, labels, buttons and badges;
+   everything meant to be read at length uses the plain body font. */
+h1, h2, h3, h4, label, .btn, .chip-btn, .badge, .eyebrow {
+  font-family: var(--font-display);
+}
+
+/* ---------- small top brand bar (all pages) ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid #000;
+  padding: 8px 14px;
+}
+.back-link:hover { background: var(--accent-yellow); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-block;
+  background: var(--accent-cyan);
+  color: #000;
+  border: var(--border);
+  box-shadow: 4px 4px 0px #000;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hover); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+.btn-block { display: block; width: 100%; margin-top: 10px; }
+.btn-print { background: var(--accent-yellow); }
+.btn-outline { background: #fff; }
+
+/* ---------- form controls ---------- */
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #000;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+}
+select:focus { outline: none; background: #fffae0; }
+
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chip-btn {
+  border: 2px solid #000;
+  background: #fff;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.chip-btn.active { background: var(--accent-pink); color: #fff; }
+
+.form-group { margin-bottom: 20px; }
+
+/* ============================================================
+   HOMEPAGE HEROES
+   ============================================================ */
+.hero {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  margin-bottom: 28px;
+}
+
+.hero-config { background: var(--accent-yellow); }
+.hero-techniques { background: var(--paper); }
+
+.hero h1, .hero h2 {
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  max-width: 60ch;
+  margin-bottom: 22px;
+}
+
+.hero-form {
+  background: #fff;
+  border: 2px solid #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skill-hint {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   ARTIST PAGE (the "sheet")
+   ============================================================ */
+.sheet {
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  position: relative;
+}
+
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 4px solid #000;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.sheet-title {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+.sheet-subtitle { margin-top: 6px; font-weight: 600; color: var(--accent-pink); }
+
+.sheet-badge {
+  background: var(--accent-orange);
+  color: #fff;
+  padding: 4px 10px;
+  border: 2px solid #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  background: #f7f7f7;
+  border: 2px solid #000;
+  padding: 12px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+.meta-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.section-block { margin-bottom: 24px; }
+.section-title {
+  background: #000;
+  color: #fff;
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  transform: rotate(-0.5deg);
+}
+.section-block p { font-size: 1rem; }
+
+.supplies-note {
+  font-size: 0.9rem;
+  color: var(--accent-pink);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.supplies-list {
+  list-style-position: outside;
+  margin-left: 1.1em;
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+.supplies-list li { margin-bottom: 4px; }
+
+.step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.step-list li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  background: #fafafa;
+  border: 2px solid #000;
+  padding: 14px;
+}
+.step-num {
+  background: var(--accent-cyan);
+  font-family: var(--font-display);
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  height: 36px;
+  width: 36px;
+  font-size: 1.1rem;
+}
+.step-list strong { display: block; margin-bottom: 4px; font-size: 1rem; }
+.step-list p { font-size: 0.95rem; color: #222; }
+
+.img-wrap {
+  position: relative;
+  border: 2px solid #000;
+  background: #f7f7f7;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.img-wrap img { display: block; width: 100%; height: auto; object-fit: cover; }
+.ref-image-wrap img { max-height: 380px; }
+.step-image-wrap img { max-height: 200px; }
+.img-fallback {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 12px;
+  min-height: 100px;
+  font-size: 0.8rem;
+  color: #666;
+}
+.img-fallback code { background: #eee; border: 1px solid #ccc; padding: 1px 5px; font-size: 0.75rem; }
+
+.technical-insert-zone {
+  border: 2px dashed var(--accent-pink);
+  background: #fff8f9;
+  padding: 16px;
+  margin-top: 20px;
+  position: relative;
+}
+.technical-insert-zone::before {
+  content: "AFFINITY DESIGNER VECTOR / SKETCH OVERLAY ZONE";
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 900;
+  background: var(--accent-pink);
+  color: #fff;
+  padding: 2px 6px;
+  position: absolute;
+  top: -10px;
+  left: 12px;
+}
+.editable-area { min-height: 80px; padding: 8px; font-size: 0.9rem; outline: none; color: #333; }
+
+.cross-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+  border: 2px solid #000;
+  background: #fff;
+  padding: 14px;
+}
+.cross-link:hover { background: var(--accent-yellow); }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .noprint { display: none !important; }
+  .sheet { border: 2px solid #000; box-shadow: none; padding: 20mm; width: 100%; }
+  .technical-insert-zone { border: 2px dashed #000; background: #fff; min-height: 180px; }
+  .technical-insert-zone::before {
+    background: #000; color: #fff;
+    content: "TECHNICAL DRAWING INSTRUCTIONS / RESERVED FOR AFFINITY VECTORS";
+  }
+}
+
+/* ============================================================
+   TECHNIQUE LIBRARY (index + individual guide pages)
+   ============================================================ */
+.tech-index-intro { margin-bottom: 24px; font-size: 1rem; max-width: 65ch; }
+
+.tech-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .tech-link-grid { grid-template-columns: 1fr; }
+}
+
+.tech-link-card {
+  display: block;
+  border: 2px solid #000;
+  background: #fafafa;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: 3px 3px 0px #000;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+.tech-link-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #000; background: #fffae0; }
+.tech-link-card h3 { font-size: 1rem; text-transform: uppercase; margin-bottom: 6px; }
+.tech-link-card p { font-size: 0.88rem; color: #555; }
+.tech-link-card .tech-arrow { display: inline-block; margin-top: 10px; font-weight: 600; color: var(--accent-pink); font-size: 0.85rem; }
+
+/* Individual technique how-to page */
+.tech-header {
+  background: var(--accent-yellow);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.tech-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.tech-header h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.15; }
+.vocab-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.vocab-chip {
+  background: #fff;
+  border: 2px solid #000;
+  padding: 4px 10px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tech-section {
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.tech-section h2 {
+  background: #000;
+  color: #fff;
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  transform: rotate(-0.5deg);
+}
+.tech-section p { font-size: 1rem; }
+.tech-section p + p { margin-top: 12px; }
+
+.practice-tip {
+  border: 2px dashed var(--accent-pink);
+  background: #fff8f9;
+  padding: 18px 16px 16px;
+  position: relative;
+}
+.practice-tip::before {
+  content: "TRY THIS";
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 900;
+  background: var(--accent-pink);
+  color: #fff;
+  padding: 2px 6px;
+  position: absolute;
+  top: -10px;
+  left: 12px;
+}
+.practice-tip p { font-size: 0.95rem; }
+
+@media (max-width: 600px) {
+  body { padding: 16px; }
+  .hero, .sheet, .tech-header, .tech-section { padding: 18px; }
+}
