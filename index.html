@@ -541,6 +541,15 @@ document.querySelectorAll('#skillGroup .chip-btn').forEach(btn => {
     document.querySelectorAll('#skillGroup .chip-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentSkill = btn.dataset.val;
+    generateProject();
+  });
+});
+
+// AUTO-GENERATE + JUMP TO THE GUIDE ON ANY SELECTION
+['artistSelect', 'mediumSelect', 'theorySelect', 'goalSelect'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    generateProject();
+    document.getElementById('printSheet').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 
