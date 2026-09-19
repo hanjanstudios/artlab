@@ -277,6 +277,44 @@
     font-size: 1.1rem;
   }
 
+  .img-wrap {
+    position: relative;
+    border: 2px solid #000;
+    background: #f7f7f7;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .img-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .ref-image-wrap img { max-height: 380px; }
+  .step-image-wrap img { max-height: 200px; }
+
+  .img-fallback {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px 12px;
+    min-height: 100px;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .img-fallback code {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 1px 5px;
+    font-size: 0.75rem;
+  }
+
   .technical-insert-zone {
     border: 2px dashed #ff2a70;
     background: #fff8f9;
@@ -427,6 +465,13 @@
       </div>
 
       <div class="section-block">
+        <div class="section-title">Reference Artwork</div>
+        <div class="img-wrap ref-image-wrap" id="outArtistImageWrap">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="section-block">
         <div class="section-title">01. Historical Context &amp; Philosophy</div>
         <p id="outHistory" style="font-size:0.95rem; margin-top:4px;">
           Giacometti reduced the human form to its rawest existential essence. Rather than copying natural weight, his sculptures explore atmospheric isolation, brittle silhouettes, and how volume reacts to surrounding void.
@@ -516,6 +561,51 @@ const TECHNIQUES = [
   { name: "Ceramic Handbuilding & Texture Marking", vocab: ["Coiling", "Sgraffito", "Slip", "Earthenware", "Leather-Hard"] }
 ];
 
+// IMAGES — drop files matching these paths into the repo and they'll appear automatically.
+// Artist reference images: images/artists/<slug>.jpg (or .jpeg/.png/.webp), one per artist.
+// Step diagrams: images/steps/01-foundational-setup.jpg, 02-signature-mark-making.jpg,
+//   03-value-hierarchy.jpg, 04-refinement.jpg (same extension fallback order).
+const IMG_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+
+const STEP_IMAGES = [
+  'images/steps/01-foundational-setup',
+  'images/steps/02-signature-mark-making',
+  'images/steps/03-value-hierarchy',
+  'images/steps/04-refinement'
+];
+
+function slugify(str) {
+  return str
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// Cycles through IMG_EXTS for a given base path; falls back to a placeholder note if none load.
+function tryImageExts(imgEl) {
+  const attempt = parseInt(imgEl.dataset.attempt || '0', 10);
+  if (attempt >= IMG_EXTS.length) {
+    imgEl.style.display = 'none';
+    const fallback = imgEl.nextElementSibling;
+    if (fallback) fallback.style.display = 'flex';
+    return;
+  }
+  imgEl.dataset.attempt = String(attempt + 1);
+  imgEl.src = `${imgEl.dataset.base}.${IMG_EXTS[attempt]}`;
+}
+
+function imageBlockHTML(basePath, altText, fallbackPath) {
+  return `
+    <img src="${basePath}.${IMG_EXTS[0]}" data-base="${basePath}" data-attempt="1" alt="${altText}" onerror="tryImageExts(this)">
+    <div class="img-fallback">
+      <strong>No image yet</strong>
+      <span>Add <code>${fallbackPath}.jpg</code> (or .png/.webp)</span>
+    </div>
+  `;
+}
+
 // INIT FORM
 const artistSelect = document.getElementById("artistSelect");
 const theorySelect = document.getElementById("theorySelect");
@@ -576,6 +666,12 @@ function generateProject() {
   };
   document.getElementById("outGoal").textContent = goalMap[goal];
 
+  // Reference artwork image
+  const artistSlug = slugify(artist.name);
+  const artistImgBase = `images/artists/${artistSlug}`;
+  document.getElementById("outArtistImageWrap").innerHTML =
+    imageBlockHTML(artistImgBase, `Reference artwork by ${artist.name}`, artistImgBase);
+
   // History & Philosophy
   document.getElementById("outHistory").textContent = 
     `${artist.name} revolutionized modern art by questioning classical assumptions about space and representation. Working within ${artist.movement}, their emphasis on ${artist.core.toLowerCase()} provides the benchmark for this project. By fusing this master style with ${tech.name.toLowerCase()}, your finished piece will bridge historical awareness and technical competency.`;
@@ -625,11 +721,15 @@ function generateProject() {
 
   stepsData.forEach((s, idx) => {
     const li = document.createElement("li");
+    const stepImgBase = STEP_IMAGES[idx];
     li.innerHTML = `
       <div class="step-num">${idx + 1}</div>
       <div>
         <strong style="text-transform:uppercase; font-size:0.95rem; display:block; margin-bottom:4px;">${s.title}</strong>
         <p style="font-size:0.88rem; color:#222;">${s.detail}</p>
+        <div class="img-wrap step-image-wrap">
+          ${imageBlockHTML(stepImgBase, s.title, stepImgBase)}
+        </div>
       </div>
     `;
     stepsList.appendChild(li);
